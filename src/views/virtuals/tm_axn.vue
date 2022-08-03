@@ -1,12 +1,11 @@
 <script lang="ts" setup>
 //导入vue
-import {ref, reactive,getCurrentInstance} from 'vue'
+import {ref, reactive} from 'vue'
 //导入图标
 import {Edit, More, Delete} from '@element-plus/icons-vue'
 import {ElMessage} from 'element-plus'
 //导入api集
-// import Api from '../../api'
-const Api = (getCurrentInstance() as any).proxy.api
+import Api from '../../api'
 import moment from "moment";
 
 // =============定义存储储存的集合=============
