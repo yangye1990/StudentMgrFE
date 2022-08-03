@@ -44,7 +44,7 @@ export default {
     tb_project,//查询项目名称
     page,//查询页数
     number,//查询条数
-    house,//查询条数
+    house,//查询house
     eqname,//查询条数
     //楼盘热力值
     reat_score,//查询条数
