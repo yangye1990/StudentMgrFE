@@ -12,9 +12,15 @@ import moment from "moment";
 // =============定义存储储存的集合=============
 var Data = reactive({
           // 输入的查询条件
-          phone_str: ref(""),
-          source_str: ref(""),
+          dynamicValidateForm: reactive([
+            {domains: [{value:''}]},
+            {
+              names: {},
+              ranges: {},
+              values: {},
+            }
 
+          ]),
 
 
   //============存储从后台获取的所有来源信息================
@@ -186,8 +192,7 @@ const delArea = (index) => {
 // 显示全部数据
 const listAllUser = () => {
   //清除查询数据
-  Data.phone_str = "";
-  Data.source_str = "";
+
   // 重新请求
   get_tb_project();
 }
@@ -242,7 +247,6 @@ autoRun()
     </el-form-item>
   </el-form>
 
-
   <el-collapse-item title="查询条件" name="1">
     <el-form :model="dynamicValidateForm" ref="dynamicValidateForm" label-width="100px" class="demo-dynamic">
       <el-form-item v-for="(domain, index) in dynamicValidateForm.domains" :label="'条件' + index" :key="domain.key" :prop="'domains.' + index + '.value'">
@@ -261,6 +265,7 @@ autoRun()
       </el-form-item>
     </el-form>
   </el-collapse-item>
+
 
 
   <!--  <el-form :inline="true" class="demo-form-inline" style="display: flex">-->

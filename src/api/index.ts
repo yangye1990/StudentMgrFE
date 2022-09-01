@@ -22,7 +22,11 @@ let number = new APIBase('number')
 let house = new APIBase('house')
 let eqname = new APIBase('eqname')
 let reat_score = new APIBase('reat_score')
-let virtualnums = new APIBase('virtualnums')
+let reat_select = new APIBase('reat_select')
+let virtualnumsaxn = new APIBase('virtualnumsaxn')
+let virtualnumsaxb = new APIBase('virtualnumsaxb')
+let virtualnumsxfaxn = new APIBase('virtualnumsxfaxn')
+let virtualnumslaikeaxb = new APIBase('virtualnumslaikeaxb')
 
 //封装并发布
 export default {
@@ -48,6 +52,10 @@ export default {
     eqname,//查询条数
     //楼盘热力值
     reat_score,//查询条数
+    reat_select,
     //通讯中台-虚拟号
-    virtualnums,//虚拟号
+    virtualnumsaxn,//虚拟号天猫axn
+    virtualnumsaxb,//虚拟号天猫axb
+    virtualnumsxfaxn,//虚拟号新房axn
+    virtualnumslaikeaxb,//虚拟号来客axb
 }

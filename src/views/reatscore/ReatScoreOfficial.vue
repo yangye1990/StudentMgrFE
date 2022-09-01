@@ -17,13 +17,12 @@ var Data = reactive({
   salestate_str: ref(""),
   limit_str: ref(""),
 
+
   // 存储从后台获取的所有来源信息
   facultyOptions: reactive([
-    {id: '', name: ''},
-
-  ]),
+    {id:'',selects:'',selects_name:''} ]),
   // 存储选择后的值
-  facultySelected: ref(""),
+  facultySelecteds: ref(""),
 
   //===========表格区域===============
   reatscore: reactive([]),
@@ -32,7 +31,7 @@ var Data = reactive({
   //当前页
   currentPage: ref(1),
   //每页大小
-  pageSize: ref(10),
+  pageSize: ref(1000),
   //记录条数
   total: ref(0),
 })
@@ -51,6 +50,21 @@ const handleCurrentChange = (page: any) => {
 }
 
 // 获取查询user信息
+
+const getSelect = () => {
+  // axios请求
+  Api.reat_select.getAll()
+      .then((res) => {
+        // 判断是否成功
+        console.log('成功', res)
+        if (res.status === 200) {
+          Data.facultyOptions = res.data.results
+        }
+      }).catch((error) => {
+    console.log('失败', error)
+  })
+}
+
 const getUser = () => {
   //定义一个集合存储参数
   let params = {
@@ -58,8 +72,9 @@ const getUser = () => {
     size: Data.pageSize,
     salestate: Data.salestate_str,//可以匹配多个字段
     hid: Data.hid_str,
-    city_en: Data.city_en_str,
+    site: Data.city_en_str,
     limit: Data.limit_str,
+    selects:Data.facultySelecteds,
   }
   // axios请求
   Api.reat_score.getAll(params)
@@ -86,7 +101,6 @@ const getUser = () => {
   })
 }
 
-// 时间戳转换成时间
 
 // 显示全部数据
 const listAllUser = () => {
@@ -95,14 +109,17 @@ const listAllUser = () => {
   Data.hid_str = "";
   Data.city_en_str = "";
   Data.limit_str = "";
+  Data.facultySelecteds = "";
   // 重新请求
   getUser();
+  getSelect();
 }
 
 //定义页面加载的时候自动执行的函数
 const autoRun = () => {
   //获取user信息函数
-  getUser()
+  getUser();
+  getSelect();
 }
 // 调用自动执行的函数
 autoRun()
@@ -118,27 +135,27 @@ const setDate = (row, column) => {
 }
 
 // 销售状态排序
-const salestateSort = (obj1, obj2) => {
-  let val1 = obj1.salestate
-  let val2 = obj2.salestate
+const noticed_numSort = (obj1, obj2) => {
+  let val1 = obj1.noticed_num
+  let val2 = obj2.noticed_num
   return val1 - val2
 }
-// 5日内来电量排序
-const batterySort = (obj1, obj2) => {
-  let val1 = obj1.salestate
-  let val2 = obj2.salestate
+// 总热力值排序
+const house_hot_scoreSort = (obj1, obj2) => {
+  let val1 = obj1.house_hot_score
+  let val2 = obj2.house_hot_score
   return val1 - val2
 }
-// 关注量排序
-const focusSort = (obj1, obj2) => {
-  let val1 = obj1.focus
-  let val2 = obj2.focus
+// uv排序
+const uv_numSort = (obj1, obj2) => {
+  let val1 = obj1.uv_num
+  let val2 = obj2.uv_num
   return val1 - val2
 }
-// 重要节点排序
-const importantSort = (obj1, obj2) => {
-  let val1 = obj1.important
-  let val2 = obj2.important
+// 楼盘搜索量排序
+const search_numSort = (obj1, obj2) => {
+  let val1 = obj1.search_num
+  let val2 = obj2.search_num
   return val1 - val2
 }
 // 评测排序
@@ -176,6 +193,18 @@ const scoreSort = (obj1, obj2) => {
     <el-form-item label="数量:">
       <el-input v-model="Data.limit_str" placeholder="请输入查询数量"/>
     </el-form-item>
+
+    <el-form-item label="选择:">
+      <el-select v-model="Data.facultySelecteds" placeholder="请选择查询条件">
+      <el-option
+          v-for="item in Data.facultyOptions"
+          :key="item.id"
+          :label="item.selects_name"
+          :value="item.selects">
+      </el-option>
+    </el-select>
+    </el-form-item>
+
     <el-form-item label="楼盘hid:">
       <el-input v-model="Data.hid_str" placeholder="请输入楼盘hid"/>
     </el-form-item>
@@ -199,19 +228,16 @@ const scoreSort = (obj1, obj2) => {
   >
     <el-table-column type="index" label="序号" width="45"></el-table-column>
     <el-table-column prop="house_unique_id" label="楼盘唯一ID" align="center" width="120" :show-overflow-tooltip="true"/>
-    <el-table-column prop="city_en" label="城市" align="center" width="150" :show-overflow-tooltip="true"/>
+    <el-table-column prop="site" label="城市" align="center" width="150" :show-overflow-tooltip="true"/>
     <el-table-column prop="hid" label="楼盘hid" align="center" width="80" :show-overflow-tooltip="true"/>
-    <el-table-column prop="salestate" label="销售状态"  :sortable="true" :sort-method="salestateSort" align="center" width="200" :show-overflow-tooltip="true"/>
-    <el-table-column prop="district" label="区域ID" align="center" width="150" :show-overflow-tooltip="true"/>
+    <el-table-column prop="salestate" label="销售状态"  align="center" width="200" :show-overflow-tooltip="true"/>
+    <el-table-column prop="salestate_name" label="销售状态"  align="center" width="200" :show-overflow-tooltip="true"/>
     <el-table-column prop="name" label="楼盘名称" align="center" width="150" :show-overflow-tooltip="true"/>
-    <el-table-column prop="battery" label="15日内来电量" :sortable="true" :sort-method="batterySort" align="center" width="150" :show-overflow-tooltip="true"/>
-    <el-table-column prop="focus" label="关注量" :sortable="true" :sort-method="focusSort" align="center" width="150" :show-overflow-tooltip="true"/>
-    <el-table-column prop="important" label="重要节点" :sortable="true" :sort-method="importantSort"  align="center" width="150" :show-overflow-tooltip="true"/>
-    <el-table-column prop="review" label="评测" :sortable="true" :sort-method="reviewSort" align="center" width="150" :show-overflow-tooltip="true"/>
-    <el-table-column prop="vr" label="VR" :sortable="true" :sort-method="vrSort" align="center" width="150" :show-overflow-tooltip="true"/>
-    <el-table-column prop="tricket" label="车票" :sortable="true" :sort-method="tricketSort" align="center" width="150" :show-overflow-tooltip="true"/>
-    <el-table-column prop="score" label="总热力值" :sortable="true" :sort-method="scoreSort" align="center" width="150" :show-overflow-tooltip="true"/>
-    <el-table-column label="操作" align="center" width="150">
+    <el-table-column prop="noticed_num" label="楼盘关注量" :sortable="true" :sort-method="noticedSort" align="center" width="150" :show-overflow-tooltip="true"/>
+    <el-table-column prop="search_num" label="楼盘搜索量" :sortable="true" :sort-method="search_numSort" align="center" width="150" :show-overflow-tooltip="true"/>
+    <el-table-column prop="uv_num" label="楼盘uv量" :sortable="true" :sort-method="uv_numSort" align="center" width="150" :show-overflow-tooltip="true"/>
+    <el-table-column prop="house_hot_score" label="总热力值" :sortable="true" :sort-method="house_hot_scoreSort"  align="center" width="150" :show-overflow-tooltip="true"/>
+        <el-table-column label="操作" align="center" width="150">
       <el-button type="primary" :icon="More" circle size="small"/>
       <el-button type="warning" :icon="Edit" circle size="small"/>
       <el-button type="danger" :icon="Delete" circle size="small"/>
