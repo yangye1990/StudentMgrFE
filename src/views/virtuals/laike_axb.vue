@@ -136,7 +136,7 @@ var Data = reactive({
       {required: true, message: "手机号码不能为空", trigger: "blur"},
       {
         pattern: /^[1][3456789]\d{9}$/,
-        message: "手机号码必须要符合规范",
+        message: "手机号码必须要符合规范！",
         trigger: "blur",
       },
       {validator: validateSNoExists, trigger: 'blur' }
