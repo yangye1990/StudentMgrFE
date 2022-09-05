@@ -159,23 +159,46 @@ let menuList = reactive([
     ],
   },
   {
-    path: "/house",
+    path: "/house/official",
+    meta: {
+      title: "楼盘库后台-正式线",
+      icon: "House",
+    },
+    children: [
+      {
+        path: "/house/official/loupankuofficialxpath",
+        meta: {
+          title: "定位元素-正式线",
+          icon: "Coordinate",
+        },
+      },
+      {
+        path: "/house/official/loupankuofficialdata",
+        meta: {
+          title: "创建楼盘-正式线",
+          icon: "CreditCard",
+        },
+      },
+    ],
+  },
+  {
+    path: "/house/test",
     meta: {
       title: "楼盘库后台-测试线",
       icon: "House",
     },
     children: [
       {
-        path: "/house/loupankuxpath",
+        path: "/house/test/loupankuxpath",
         meta: {
-          title: "定位元素",
+          title: "定位元素-测试线",
           icon: "Coordinate",
         },
       },
       {
-        path: "/house/loupankudata",
+        path: "/house/test/loupankudata",
         meta: {
-          title: "创建楼盘",
+          title: "创建楼盘-测试线",
           icon: "CreditCard",
         },
       },

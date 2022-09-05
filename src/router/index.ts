@@ -236,9 +236,36 @@ const routes: Array<RouteRecordRaw> = [
             } ,
         ]
     },
-    // 楼盘库后台
+    // 楼盘库后台-正式线
     {
-        path:'/house',
+        path:'/house/official',
+        component: Layout,
+        name: 'HouseName',
+        meta:{
+            title:"楼盘库后台-元素定位"
+        },
+        children:[
+            {
+                path:'/house/official/loupankuofficialxpath',
+                component: () => import('../views/loupankugoutai/loupankuhoutofficialxpath.vue'),
+                name: 'OfficialXpath',
+                meta:{
+                    title:"元素定位"
+                },
+            } ,
+            {
+                path:'/house/official/loupankuofficialdata',
+                component: () => import('../views/loupankugoutai/loupankuhoutaiofficialdata.vue'),
+                name: 'OfficialData',
+                meta:{
+                    title:"创建楼盘"
+                },
+            }
+        ]
+    },
+    // 楼盘库后台-测试线
+    {
+        path:'/house/test',
         component: Layout,
         name: 'House',
         meta:{
@@ -246,7 +273,7 @@ const routes: Array<RouteRecordRaw> = [
         },
         children:[
             {
-                path:'/house/loupankuxpath',
+                path:'/house/test/loupankuxpath',
                 component: () => import('../views/loupankugoutai/loupankuhoutxpath.vue'),
                 name: 'Xpath',
                 meta:{
@@ -254,7 +281,7 @@ const routes: Array<RouteRecordRaw> = [
                 },
             } ,
             {
-                path:'/house/loupankudata',
+                path:'/house/test/loupankudata',
                 component: () => import('../views/loupankugoutai/loupankuhoutaidata.vue'),
                 name: 'Data',
                 meta:{
@@ -263,6 +290,7 @@ const routes: Array<RouteRecordRaw> = [
             }
         ]
     },
+
 
 
 ]

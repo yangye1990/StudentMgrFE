@@ -29,6 +29,8 @@ let virtualnumsxfaxn = new APIBase('virtualnumsxfaxn')
 let virtualnumslaikeaxb = new APIBase('virtualnumslaikeaxb')
 let loupankuhoutaixpath = new APIBase('loupankuhoutaixpath')
 let loupankuhoutaidata = new APIBase('loupankuhoutaidata')
+let loupankuhoutaiofficialxpath = new APIBase('loupankuhoutaiofficialxpath')
+let loupankuhoutaiofficialdata = new APIBase('loupankuhoutaiofficialdata')
 
 //封装并发布
 export default {
@@ -60,7 +62,10 @@ export default {
     virtualnumsaxb,//虚拟号天猫axb
     virtualnumsxfaxn,//虚拟号新房axn
     virtualnumslaikeaxb,//虚拟号来客axb
-    //楼盘库后台
+    //楼盘库后台-测试线
     loupankuhoutaixpath,//定位元素
     loupankuhoutaidata,//创建楼盘
+    //楼盘库后台-正式线
+    loupankuhoutaiofficialxpath,//定位元素
+    loupankuhoutaiofficialdata,//创建楼盘
 }
