@@ -161,21 +161,21 @@ let menuList = reactive([
   {
     path: "/house",
     meta: {
-      title: "楼盘库后台",
-      icon: "School",
+      title: "楼盘库后台-测试线",
+      icon: "House",
     },
     children: [
       {
-        path: "/house/add",
+        path: "/house/loupankuxpath",
         meta: {
-          title: "创建楼盘",
+          title: "定位元素",
           icon: "Coordinate",
         },
       },
       {
-        path: "/house/perform",
+        path: "/house/loupankudata",
         meta: {
-          title: "运行创建",
+          title: "创建楼盘",
           icon: "CreditCard",
         },
       },

@@ -236,6 +236,33 @@ const routes: Array<RouteRecordRaw> = [
             } ,
         ]
     },
+    // 楼盘库后台
+    {
+        path:'/house',
+        component: Layout,
+        name: 'House',
+        meta:{
+            title:"楼盘库后台-元素定位"
+        },
+        children:[
+            {
+                path:'/house/loupankuxpath',
+                component: () => import('../views/loupankugoutai/loupankuhoutxpath.vue'),
+                name: 'Xpath',
+                meta:{
+                    title:"元素定位"
+                },
+            } ,
+            {
+                path:'/house/loupankudata',
+                component: () => import('../views/loupankugoutai/loupankuhoutaidata.vue'),
+                name: 'Data',
+                meta:{
+                    title:"创建楼盘"
+                },
+            }
+        ]
+    },
 
 
 ]

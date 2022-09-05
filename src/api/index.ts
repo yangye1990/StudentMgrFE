@@ -27,6 +27,8 @@ let virtualnumsaxn = new APIBase('virtualnumsaxn')
 let virtualnumsaxb = new APIBase('virtualnumsaxb')
 let virtualnumsxfaxn = new APIBase('virtualnumsxfaxn')
 let virtualnumslaikeaxb = new APIBase('virtualnumslaikeaxb')
+let loupankuhoutaixpath = new APIBase('loupankuhoutaixpath')
+let loupankuhoutaidata = new APIBase('loupankuhoutaidata')
 
 //封装并发布
 export default {
@@ -58,4 +60,7 @@ export default {
     virtualnumsaxb,//虚拟号天猫axb
     virtualnumsxfaxn,//虚拟号新房axn
     virtualnumslaikeaxb,//虚拟号来客axb
+    //楼盘库后台
+    loupankuhoutaixpath,//定位元素
+    loupankuhoutaidata,//创建楼盘
 }
