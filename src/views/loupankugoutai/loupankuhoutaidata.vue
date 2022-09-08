@@ -162,10 +162,10 @@ const laterCommit = () => {
   proxy.$refs.dataFormRef.validate((valid: boolean)=>{
     // 添加或者修改
     if (Data.isEdit) {
+      //开启loading
+      openLoading()
       // 修改
       Api.loupankuhoutaidata.edit(Data.dataForm.id, Data.dataForm).then((res) => {
-        // 开启loading
-        openLoading()
         if (res.status === 201) {
           // 关闭loading
           closeLoading()
