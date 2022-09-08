@@ -112,52 +112,52 @@ let menuList = reactive([
       },
     ],
   },
-  {
-    path: "/contentspooling",
-    meta: {
-      title: "内容池查询",
-      icon: "Search",
-    },
-    children: [
-      {
-        path: "/contentspooling/official",
-        meta: {
-          title: "正式线",
-          icon: "ShoppingBag",
-        },
-      },
-      {
-        path: "/contentspooling/test",
-        meta: {
-          title: "测试线",
-          icon: "Ship",
-        },
-      },
-    ],
-  },
-  {
-    path: "/live",
-    meta: {
-      title: "图文直播",
-      icon: "PictureFilled",
-    },
-    children: [
-      {
-        path: "/live/add",
-        meta: {
-          title: "创建图文直播",
-          icon: "VideoCameraFilled",
-        },
-      },
-      {
-        path: "/live/perform",
-        meta: {
-          title: "运行创建",
-          icon: "OfficeBuilding",
-        },
-      },
-    ],
-  },
+  // {
+  //   path: "/contentspooling",
+  //   meta: {
+  //     title: "内容池查询",
+  //     icon: "Search",
+  //   },
+  //   children: [
+  //     {
+  //       path: "/contentspooling/official",
+  //       meta: {
+  //         title: "正式线",
+  //         icon: "ShoppingBag",
+  //       },
+  //     },
+  //     {
+  //       path: "/contentspooling/test",
+  //       meta: {
+  //         title: "测试线",
+  //         icon: "Ship",
+  //       },
+  //     },
+  //   ],
+  // },
+  // {
+  //   path: "/live",
+  //   meta: {
+  //     title: "图文直播",
+  //     icon: "PictureFilled",
+  //   },
+  //   children: [
+  //     {
+  //       path: "/live/add",
+  //       meta: {
+  //         title: "创建图文直播",
+  //         icon: "VideoCameraFilled",
+  //       },
+  //     },
+  //     {
+  //       path: "/live/perform",
+  //       meta: {
+  //         title: "运行创建",
+  //         icon: "OfficeBuilding",
+  //       },
+  //     },
+  //   ],
+  // },
   {
     path: "/house/official",
     meta: {

@@ -11,7 +11,7 @@ export default class APIBase {
     }
 
     // 获取所有
-    public getAll = (params?:any) =>{
+    public getAll = (params?:any,) =>{
         //request请求
         return request({
             method:'get',

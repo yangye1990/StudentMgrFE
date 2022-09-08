@@ -8,6 +8,8 @@ import {ElMessage,ElMessageBox} from 'element-plus'
 import Api from '../../api'
 import moment from "moment";
 
+import { openLoading, closeLoading } from "../../utils/loading";
+
 //获取当前的instance
 const {proxy} = getCurrentInstance() as any
 
@@ -146,26 +148,16 @@ const getUser = () => {
   // axios请求
   Api.virtualnumsaxn.getAll(params)
       .then((res) => {
+        // 开启loading
+        openLoading()
         // 判断是否成功
-        console.log('成功', res)
         if (res.status === 200) {
+          // 关闭loading
+          closeLoading()
           Data.users = res.data.results
           Data.total = res.data.count
-          // 提示成功
-          ElMessage({
-            message: '数据加载成功',
-            type: 'success',
-          })
-        } else {
-          // 提示成功
-          ElMessage({
-            message: '数据加载失败',
-            type: 'error',
-          })
         }
-      }).catch((error) => {
-    console.log('失败', error)
-  })
+      })
 }
 
 // 添加数据
@@ -194,9 +186,13 @@ const laterCommit = () => {
   proxy.$refs.dataFormRef.validate((valid: boolean)=>{
       // 添加或者修改
       if (Data.isEdit) {
+        // 开启loading
+        openLoading()
             // 修改
         Api.virtualnumsaxn.edit(Data.dataForm.id, Data.dataForm).then((res) => {
           if (res.status === 201) {
+            // 关闭loading
+            closeLoading()
             // 重新加载数据
             getUser();
             // 关闭弹出层
@@ -212,6 +208,8 @@ const laterCommit = () => {
       } else {
         // 添加
         Api.virtualnumsaxn.add(Data.dataForm).then((res) => {
+          // 关闭loading
+          closeLoading()
           // 重新加载数据
           getUser();
           // 关闭弹出层
@@ -230,9 +228,13 @@ const laterCommit = () => {
 const delVirtualnumsaxn=(row:any)=>{
   let confirmStr = "您确定要删除【TelA：" + row.telA + "\t Biz：" + row.biz + "】信息吗？";
   ElMessageBox.confirm(confirmStr).then(()=>{
+    // 开启loading
+    openLoading()
     // 删除！
     Api.virtualnumsaxn.del(row.id).then((res)=>{
       if(res.status === 204){
+        //关闭loading
+        closeLoading()
         // 重新加载数据
         getUser();
         // 关闭弹出层

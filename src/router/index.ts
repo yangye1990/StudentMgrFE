@@ -141,31 +141,31 @@ const routes: Array<RouteRecordRaw> = [
         ]
     },
     // 内容池查询
-    {
-        path:'/contentspooling',
-        component: Layout,
-        name: 'contentspooling',
-        meta:{
-            title:"内容池查询"
-        },
-        children:[
-            {
-                path:'/contentspooling/official',
-                component: () => import('../views/spooling/OfficialContent.vue'),
-                name: 'official',
-                meta:{
-                    title:"正式线内容池"
-                },
-            } ,
-            {
-                path:'/contentspooling/test',
-                component: () => import('../views/spooling/TestContent.vue'),
-                name: 'test',
-                meta:{
-                    title:"测试线内容池"
-                },
-            }
-        ]},
+    // {
+    //     path:'/contentspooling',
+    //     component: Layout,
+    //     name: 'contentspooling',
+    //     meta:{
+    //         title:"内容池查询"
+    //     },
+    //     children:[
+    //         {
+    //             path:'/contentspooling/official',
+    //             component: () => import('../views/spooling/OfficialContent.vue'),
+    //             name: 'official',
+    //             meta:{
+    //                 title:"正式线内容池"
+    //             },
+    //         } ,
+    //         {
+    //             path:'/contentspooling/test',
+    //             component: () => import('../views/spooling/TestContent.vue'),
+    //             name: 'test',
+    //             meta:{
+    //                 title:"测试线内容池"
+    //             },
+    //         }
+    //     ]},
     // 楼盘热力值
     {
         path:'/heat',
@@ -242,7 +242,7 @@ const routes: Array<RouteRecordRaw> = [
         component: Layout,
         name: 'HouseName',
         meta:{
-            title:"楼盘库后台-元素定位"
+            title:"楼盘库后台-正式线-元素定位"
         },
         children:[
             {
@@ -250,7 +250,7 @@ const routes: Array<RouteRecordRaw> = [
                 component: () => import('../views/loupankugoutai/loupankuhoutofficialxpath.vue'),
                 name: 'OfficialXpath',
                 meta:{
-                    title:"元素定位"
+                    title:"正式线-元素定位"
                 },
             } ,
             {
@@ -258,7 +258,7 @@ const routes: Array<RouteRecordRaw> = [
                 component: () => import('../views/loupankugoutai/loupankuhoutaiofficialdata.vue'),
                 name: 'OfficialData',
                 meta:{
-                    title:"创建楼盘"
+                    title:"正式线-创建楼盘"
                 },
             }
         ]
@@ -269,7 +269,7 @@ const routes: Array<RouteRecordRaw> = [
         component: Layout,
         name: 'House',
         meta:{
-            title:"楼盘库后台-元素定位"
+            title:"楼盘库后台-测试线-元素定位"
         },
         children:[
             {
@@ -277,7 +277,7 @@ const routes: Array<RouteRecordRaw> = [
                 component: () => import('../views/loupankugoutai/loupankuhoutxpath.vue'),
                 name: 'Xpath',
                 meta:{
-                    title:"元素定位"
+                    title:"测试线-元素定位"
                 },
             } ,
             {
@@ -285,7 +285,7 @@ const routes: Array<RouteRecordRaw> = [
                 component: () => import('../views/loupankugoutai/loupankuhoutaidata.vue'),
                 name: 'Data',
                 meta:{
-                    title:"创建楼盘"
+                    title:"测试线-创建楼盘"
                 },
             }
         ]

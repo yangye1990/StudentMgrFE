@@ -7,6 +7,7 @@ import {ElMessage,ElMessageBox} from 'element-plus'
 //导入api集
 import Api from '../../api'
 import moment from "moment";
+import { openLoading, closeLoading } from "../../utils/loading";
 
 //获取当前的instance
 const {proxy} = getCurrentInstance() as any
@@ -136,7 +137,7 @@ var Data = reactive({
       {required: true, message: "手机号码不能为空", trigger: "blur"},
       {
         pattern: /^[1][3456789]\d{9}$/,
-        message: "手机号码必须要符合规范！",
+        message: "手机号码必须要符合规范",
         trigger: "blur",
       },
       {validator: validateSNoExists, trigger: 'blur' }
@@ -175,26 +176,18 @@ const getUser = () => {
   // axios请求
   Api.virtualnumslaikeaxb.getAll(params)
       .then((res) => {
+        // 开启loading
+        openLoading()
         // 判断是否成功
         console.log('成功', res)
         if (res.status === 200) {
+          // 关闭loading
+          closeLoading()
           Data.users = res.data.results
           Data.total = res.data.count
-          // 提示成功
-          ElMessage({
-            message: '数据加载成功',
-            type: 'success',
-          })
         } else {
-          // 提示成功
-          ElMessage({
-            message: '数据加载失败',
-            type: 'error',
-          })
         }
-      }).catch((error) => {
-    console.log('失败', error)
-  })
+      })
 }
 
 // 添加数据
@@ -221,11 +214,15 @@ const editData = (row: any) => {
 const laterCommit = () => {
   // 提交！
   proxy.$refs.dataFormRef.validate((valid: boolean)=>{
+    // 开启loading
+    openLoading()
     // 添加或者修改
     if (Data.isEdit) {
       // 修改
       Api.virtualnumslaikeaxb.edit(Data.dataForm.id, Data.dataForm).then((res) => {
         if (res.status === 201) {
+          // 关闭loading
+          closeLoading()
           // 重新加载数据
           getUser();
           // 关闭弹出层
@@ -241,6 +238,8 @@ const laterCommit = () => {
     } else {
       // 添加
       Api.virtualnumslaikeaxb.add(Data.dataForm).then((res) => {
+      // 关闭loading
+        closeLoading()
         // 重新加载数据
         getUser();
         // 关闭弹出层
@@ -259,8 +258,12 @@ const laterCommit = () => {
 const delVirtualnumslaikeaxb=(row:any)=>{
   let confirmStr = "您确定要删除【TelA：" + row.telA + "\t Biz：" + row.biz + "】信息吗？";
   ElMessageBox.confirm(confirmStr).then(()=>{
+    // 开启loading
+    openLoading()
     // 删除！
     Api.virtualnumslaikeaxb.del(row.id).then((res)=>{
+    // 关闭loading
+      closeLoading()
       if(res.status === 204){
         // 重新加载数据
         getUser();

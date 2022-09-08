@@ -9,6 +9,8 @@ import Api from '../../api'
 
 import moment from "moment";
 
+import { openLoading, closeLoading } from "../../utils/loading";
+
 // =============定义存储储存的集合=============
 var Data = reactive({
   // 输入的查询条件
@@ -64,22 +66,16 @@ const getUser=()=>{
   // axios请求
   Api.consult_yhuser.getAll(params)
       .then((res) =>{
+        // 开启loading
+        openLoading()
         // 判断是否成功
-        console.log('成功',res)
         if (res.status === 200){
+          // 关闭loading
+          closeLoading()
           Data.consultyhuser = res.data.results.sort((a, b) => new Date(b.utime).getTime() - new Date(a.utime).getTime()) //这是升序，倒序的话翻过来
           Data.total = res.data.count
-          // 提示成功
-          ElMessage({
-            message: '数据加载成功',
-            type: 'success',
-          })
-        } else {
-
         }
-      }).catch((error)=>{
-    console.log('失败',error)
-  })
+      })
 }
 
 // 时间戳转换成时间

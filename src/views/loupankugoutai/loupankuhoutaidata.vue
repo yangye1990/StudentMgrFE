@@ -8,6 +8,9 @@ import {ElMessage,ElMessageBox} from 'element-plus'
 import Api from '../../api'
 import moment from "moment";
 
+import { openLoading, closeLoading } from "../../utils/loading";
+
+
 //获取当前的instance
 const {proxy} = getCurrentInstance() as any
 
@@ -60,25 +63,25 @@ var Data = reactive({
   // 表单数据
   dataForm: reactive({
     id: ref(""),
-    choose_city: ref(""),
+    choose_city: ref("阿坝"),
     email: ref(""),
     password: ref(""),
-    selectname: ref(""),
-    floorname: ref(""),
-    floorpinyin: ref(""),
-    thesaurus: ref(""),
-    description: ref(""),
-    address: ref(""),
-    tags: ref(""),
-    iphone: ref(""),
-    area_code: ref(""),
-    building: ref(""),
-    property: ref(""),
-    situation: ref(""),
-    developers: ref(""),
-    sales: ref(""),
-    period: ref(""),
-    introduction: ref(""),
+    // selectname: ref(""),
+    floorname: ref("天猫好房册01"),
+    floorpinyin: ref("tianmaohaofangce01"),
+    // thesaurus: ref(""),
+    // description: ref(""),
+    address: ref("汶川"),
+    // tags: ref(""),
+    iphone: ref("58951110"),
+    // area_code: ref(""),
+    // building: ref(""),
+    // property: ref(""),
+    // situation: ref(""),
+    // developers: ref(""),
+    // sales: ref(""),
+    // period: ref(""),
+    // introduction: ref(""),
   }),
   //是否查看状态
   isView: ref(false),
@@ -120,20 +123,17 @@ const getUser = () => {
   // axios请求
   Api.loupankuhoutaidata.getAll(params)
       .then((res) => {
+        // 开启loading
+        openLoading()
         // 判断是否成功
-        console.log('成功', res)
         if (res.status === 200) {
+          // 关闭loading
+          closeLoading()
           Data.users = res.data.results
           Data.total = res.data.count
           // 提示成功
-          ElMessage({
-            message: '数据加载成功',
-            type: 'success',
-          })
         }
-      }).catch((error) => {
-    console.log('失败', error)
-  })
+      })
 }
 
 // 添加数据
@@ -164,7 +164,11 @@ const laterCommit = () => {
     if (Data.isEdit) {
       // 修改
       Api.loupankuhoutaidata.edit(Data.dataForm.id, Data.dataForm).then((res) => {
+        // 开启loading
+        openLoading()
         if (res.status === 201) {
+          // 关闭loading
+          closeLoading()
           // 重新加载数据
           getUser();
           // 关闭弹出层
@@ -180,6 +184,8 @@ const laterCommit = () => {
     } else {
       // 添加
       Api.loupankuhoutaidata.add(Data.dataForm).then((res) => {
+        // 关闭loading
+        closeLoading()
         // 重新加载数据
         getUser();
         // 关闭弹出层
@@ -198,9 +204,13 @@ const laterCommit = () => {
 const delLoupankuhoutaidata=(row:any)=>{
   let confirmStr = "您确定要删除【choose_city：" + row.choose_city + "\t floorname：" + row.floorname + "】信息吗？";
   ElMessageBox.confirm(confirmStr).then(()=>{
+    // 开启loading
+    openLoading()
     // 删除！
     Api.loupankuhoutaidata.del(row.id).then((res)=>{
       if(res.status === 204){
+        // 关闭loading
+        closeLoading()
         // 重新加载数据
         getUser();
         // 关闭弹出层
@@ -215,6 +225,7 @@ const delLoupankuhoutaidata=(row:any)=>{
   })
 }
 
+
 // 关闭弹出层
 const closeLater = () => {
   Data.dialogFormVisible = false;
@@ -224,23 +235,23 @@ const closeLater = () => {
   Data.dataForm.id = "";
   Data.dataForm.email = "";
   Data.dataForm.password = "";
-  Data.dataForm.choose_city = "";
-  Data.dataForm.selectname = "";
-  Data.dataForm.floorname = "";
-  Data.dataForm.floorpinyin = "";
-  Data.dataForm.thesaurus = "";
-  Data.dataForm.description = "";
-  Data.dataForm.address = "";
-  Data.dataForm.tags = "";
-  Data.dataForm.iphone = "";
-  Data.dataForm.area_code = "";
-  Data.dataForm.building = "";
-  Data.dataForm.property = "";
-  Data.dataForm.situation = "";
-  Data.dataForm.developers = "";
-  Data.dataForm.sales = "";
-  Data.dataForm.period = "";
-  Data.dataForm.introduction = "";
+  // Data.dataForm.choose_city = "";
+  // Data.dataForm.selectname = "";
+  // Data.dataForm.floorname = "";
+  // Data.dataForm.floorpinyin = "";
+  // Data.dataForm.thesaurus = "";
+  // Data.dataForm.description = "";
+  // Data.dataForm.address = "";
+  // Data.dataForm.tags = "";
+  // Data.dataForm.iphone = "";
+  // Data.dataForm.area_code = "";
+  // Data.dataForm.building = "";
+  // Data.dataForm.property = "";
+  // Data.dataForm.situation = "";
+  // Data.dataForm.developers = "";
+  // Data.dataForm.sales = "";
+  // Data.dataForm.period = "";
+  // Data.dataForm.introduction = "";
 
   // 重置表单的校验
   proxy.$refs.dataFormRef.resetFields();
@@ -291,27 +302,27 @@ autoRun()
             :header-cell-style="{backgroundColor:'#409Eff',color:'#FFF',fontSize:'14px'}"
   >
     <el-table-column type="index" label="序号" width="45"></el-table-column>
-    <el-table-column prop="is_state" label="是否创建成功" align="center" width="120" :show-overflow-tooltip="true"/>
-    <el-table-column prop="email"  label="邮箱账号" align="center"  width="120" :show-overflow-tooltip="true" />
-    <el-table-column prop="pass_word"  label="账号密码" show-password  align="center"  width="120" :show-overflow-tooltip="true" />
-    <el-table-column prop="choose_city"  label="选择城市" align="center"  width="120" :show-overflow-tooltip="true" />
-    <el-table-column prop="selectname" label="责任编辑" align="center" width="120" :show-overflow-tooltip="true"/>
-    <el-table-column prop="floorname" label="楼盘名称" align="center" width="120" :show-overflow-tooltip="true"/>
-    <el-table-column prop="floorpinyin" label="楼盘名称英文" align="center" width="120" :show-overflow-tooltip="true"/>
-    <el-table-column prop="thesaurus" label="楼盘关键词" align="center" width="120" :show-overflow-tooltip="true"/>
-    <el-table-column prop="description" label="一句话描述" align="center" width="120" :show-overflow-tooltip="true"/>
-    <el-table-column prop="address" label="楼盘地址" align="center" width="120" :show-overflow-tooltip="true"/>
-    <el-table-column prop="tags" label="楼盘标签" align="center" width="120" :show-overflow-tooltip="true"/>
+    <el-table-column prop="is_state" label="是否创建成功" align="center" width="140" :show-overflow-tooltip="true"/>
+    <el-table-column prop="email"  label="邮箱账号" align="center"  width="150" :show-overflow-tooltip="true" />
+    <el-table-column prop="pass_word"  label="账号密码" show-password  align="center"  width="80" :show-overflow-tooltip="true" />
+    <el-table-column prop="choose_city"  label="选择城市" align="center"  width="80" :show-overflow-tooltip="true" />
+<!--    <el-table-column prop="selectname" label="责任编辑" align="center" width="120" :show-overflow-tooltip="true"/>-->
+    <el-table-column prop="floorname" label="楼盘名称" align="center" width="150" :show-overflow-tooltip="true"/>
+    <el-table-column prop="floorpinyin" label="楼盘名称英文" align="center" width="150" :show-overflow-tooltip="true"/>
+<!--    <el-table-column prop="thesaurus" label="楼盘关键词" align="center" width="120" :show-overflow-tooltip="true"/>-->
+<!--    <el-table-column prop="description" label="一句话描述" align="center" width="120" :show-overflow-tooltip="true"/>-->
+    <el-table-column prop="address" label="楼盘地址" align="center" width="80" :show-overflow-tooltip="true"/>
+<!--    <el-table-column prop="tags" label="楼盘标签" align="center" width="120" :show-overflow-tooltip="true"/>-->
     <el-table-column prop="iphone" label="售楼电话" align="center" width="120" :show-overflow-tooltip="true"/>
-    <el-table-column prop="area_code" label="区 号" align="center" width="120" :show-overflow-tooltip="true"/>
-    <el-table-column prop="building" label="建筑类型" align="center" width="120" :show-overflow-tooltip="true"/>
-    <el-table-column prop="property" label="物业类型" align="center" width="120" :show-overflow-tooltip="true"/>
-    <el-table-column prop="situation" label="装修情况" align="center" width="120" :show-overflow-tooltip="true"/>
-    <el-table-column prop="developers" label="开发商" align="center" width="120" :show-overflow-tooltip="true"/>
-    <el-table-column prop="sales" label="销售状态" align="center" width="120" :show-overflow-tooltip="true"/>
-    <el-table-column prop="period" label="产权年限" align="center" width="120" :show-overflow-tooltip="true"/>
-    <el-table-column prop="introduction" label="项目介绍" align="center" width="120" :show-overflow-tooltip="true"/>
-    <el-table-column label="操作" align="center" width="150px">
+<!--    <el-table-column prop="area_code" label="区 号" align="center" width="120" :show-overflow-tooltip="true"/>-->
+<!--    <el-table-column prop="building" label="建筑类型" align="center" width="120" :show-overflow-tooltip="true"/>-->
+<!--    <el-table-column prop="property" label="物业类型" align="center" width="120" :show-overflow-tooltip="true"/>-->
+<!--    <el-table-column prop="situation" label="装修情况" align="center" width="120" :show-overflow-tooltip="true"/>-->
+<!--    <el-table-column prop="developers" label="开发商" align="center" width="120" :show-overflow-tooltip="true"/>-->
+<!--    <el-table-column prop="sales" label="销售状态" align="center" width="120" :show-overflow-tooltip="true"/>-->
+<!--    <el-table-column prop="period" label="产权年限" align="center" width="120" :show-overflow-tooltip="true"/>-->
+<!--    <el-table-column prop="introduction" label="项目介绍" align="center" width="120" :show-overflow-tooltip="true"/>-->
+    <el-table-column label="操作" align="center" width="150" >
       <template #default="scope">
         <el-button type="primary" :icon="More" @click="viewData(scope.row)" circle size="small"/>
         <el-button type="warning" :icon="Edit" @click="editData(scope.row)" circle size="small"/>
@@ -354,10 +365,10 @@ autoRun()
         <el-input v-model="Data.dataForm.choose_city" :disabled="Data.isView" :suffix-icon="Edit"
                   placeholder="请输入选择的城市"></el-input>
       </el-form-item>
-      <el-form-item label="选择编辑"  >
-        <el-input v-model="Data.dataForm.selectname" :disabled="Data.isView" :suffix-icon="Edit"
-                  placeholder="请输入选择的编辑"></el-input>
-      </el-form-item>
+<!--      <el-form-item label="选择编辑"  >-->
+<!--        <el-input v-model="Data.dataForm.selectname" :disabled="Data.isView" :suffix-icon="Edit"-->
+<!--                  placeholder="请输入选择的编辑"></el-input>-->
+<!--      </el-form-item>-->
       <el-form-item label="楼盘名称"  >
         <el-input v-model="Data.dataForm.floorname" :disabled="Data.isView" :suffix-icon="Edit"
                   placeholder="请输入楼盘名称"></el-input>
@@ -366,47 +377,47 @@ autoRun()
         <el-input v-model="Data.dataForm.floorpinyin" :disabled="Data.isView" :suffix-icon="Edit"
                   placeholder="请输入楼盘名称拼音"></el-input>
       </el-form-item>
-      <el-form-item label="楼盘关键词"  >
-        <el-input v-model="Data.dataForm.thesaurus" :disabled="Data.isView" :suffix-icon="Edit"
-                  placeholder="请输入楼盘关键词"></el-input>
-      </el-form-item>
-      <el-form-item label="一句话描述"  >
-        <el-input v-model="Data.dataForm.description" :disabled="Data.isView" :suffix-icon="Edit"
-                  placeholder="请输入一句话描述"></el-input>
-      </el-form-item>
+<!--      <el-form-item label="楼盘关键词"  >-->
+<!--        <el-input v-model="Data.dataForm.thesaurus" :disabled="Data.isView" :suffix-icon="Edit"-->
+<!--                  placeholder="请输入楼盘关键词"></el-input>-->
+<!--      </el-form-item>-->
+<!--      <el-form-item label="一句话描述"  >-->
+<!--        <el-input v-model="Data.dataForm.description" :disabled="Data.isView" :suffix-icon="Edit"-->
+<!--                  placeholder="请输入一句话描述"></el-input>-->
+<!--      </el-form-item>-->
       <el-form-item label="楼盘地址"  >
         <el-input v-model="Data.dataForm.address" :disabled="Data.isView" :suffix-icon="Edit" placeholder="请输入楼盘地址"></el-input>
       </el-form-item>
-      <el-form-item label="楼盘标签" >
-        <el-input v-model="Data.dataForm.tags" :disabled="Data.isView" :suffix-icon="Edit" placeholder="请输入楼盘标签"></el-input>
-      </el-form-item>
+<!--      <el-form-item label="楼盘标签" >-->
+<!--        <el-input v-model="Data.dataForm.tags" :disabled="Data.isView" :suffix-icon="Edit" placeholder="请输入楼盘标签"></el-input>-->
+<!--      </el-form-item>-->
       <el-form-item label="楼盘热线" >
         <el-input v-model="Data.dataForm.iphone" :disabled="Data.isView" :suffix-icon="Edit" placeholder="请输入楼盘热线"></el-input>
       </el-form-item>
-      <el-form-item label="区 号" >
-        <el-input v-model="Data.dataForm.area_code" :disabled="Data.isView" :suffix-icon="Edit" placeholder="请输入区号"></el-input>
-      </el-form-item>
-      <el-form-item label="建筑类型" >
-        <el-input v-model="Data.dataForm.building" :disabled="Data.isView" :suffix-icon="Edit" placeholder="请输入建筑类型"></el-input>
-      </el-form-item>
-      <el-form-item label="物业类型" >
-        <el-input v-model="Data.dataForm.property" :disabled="Data.isView" :suffix-icon="Edit" placeholder="请输入物业类型"></el-input>
-      </el-form-item>
-      <el-form-item label="装修情况" >
-        <el-input v-model="Data.dataForm.situation" :disabled="Data.isView" :suffix-icon="Edit" placeholder="请输入装修情况"></el-input>
-      </el-form-item>
-      <el-form-item label="开发商" >
-        <el-input v-model="Data.dataForm.developers" :disabled="Data.isView" :suffix-icon="Edit" placeholder="请输入开发商"></el-input>
-      </el-form-item>
-      <el-form-item label="销售状态" >
-        <el-input v-model="Data.dataForm.sales" :disabled="Data.isView" :suffix-icon="Edit" placeholder="请输入销售状态"></el-input>
-      </el-form-item>
-      <el-form-item label="产权年限" >
-        <el-input v-model="Data.dataForm.period" :disabled="Data.isView" :suffix-icon="Edit" placeholder="请输入产权年限"></el-input>
-      </el-form-item>
-      <el-form-item label="项目介绍" >
-        <el-input v-model="Data.dataForm.introduction" :disabled="Data.isView" :suffix-icon="Edit" placeholder="请输入项目介绍"></el-input>
-      </el-form-item>
+<!--      <el-form-item label="区 号" >-->
+<!--        <el-input v-model="Data.dataForm.area_code" :disabled="Data.isView" :suffix-icon="Edit" placeholder="请输入区号"></el-input>-->
+<!--      </el-form-item>-->
+<!--      <el-form-item label="建筑类型" >-->
+<!--        <el-input v-model="Data.dataForm.building" :disabled="Data.isView" :suffix-icon="Edit" placeholder="请输入建筑类型"></el-input>-->
+<!--      </el-form-item>-->
+<!--      <el-form-item label="物业类型" >-->
+<!--        <el-input v-model="Data.dataForm.property" :disabled="Data.isView" :suffix-icon="Edit" placeholder="请输入物业类型"></el-input>-->
+<!--      </el-form-item>-->
+<!--      <el-form-item label="装修情况" >-->
+<!--        <el-input v-model="Data.dataForm.situation" :disabled="Data.isView" :suffix-icon="Edit" placeholder="请输入装修情况"></el-input>-->
+<!--      </el-form-item>-->
+<!--      <el-form-item label="开发商" >-->
+<!--        <el-input v-model="Data.dataForm.developers" :disabled="Data.isView" :suffix-icon="Edit" placeholder="请输入开发商"></el-input>-->
+<!--      </el-form-item>-->
+<!--      <el-form-item label="销售状态" >-->
+<!--        <el-input v-model="Data.dataForm.sales" :disabled="Data.isView" :suffix-icon="Edit" placeholder="请输入销售状态"></el-input>-->
+<!--      </el-form-item>-->
+<!--      <el-form-item label="产权年限" >-->
+<!--        <el-input v-model="Data.dataForm.period" :disabled="Data.isView" :suffix-icon="Edit" placeholder="请输入产权年限"></el-input>-->
+<!--      </el-form-item>-->
+<!--      <el-form-item label="项目介绍" >-->
+<!--        <el-input v-model="Data.dataForm.introduction" :disabled="Data.isView" :suffix-icon="Edit" placeholder="请输入项目介绍"></el-input>-->
+<!--      </el-form-item>-->
     </el-form>
     <div slot="footer" class="dialog-footer">
       <el-button type="primary" v-show="!Data.isView" @click="laterCommit">提交</el-button>

@@ -2,14 +2,22 @@
 import axios from "axios";
 import { ElMessage } from "element-plus";
 import {tooltipV2ContentKey} from "element-plus";
+//loading
+import { openLoading, closeLoading } from "./loading";
+
+
 // 创建一个axios的APP
 const request = axios.create({
-    // baseURL:'http://10.208.24.238:9000/api/v1/',
-    baseURL: 'http://127.0.0.1:9000/api/v1/',//本地
+    baseURL:'http://10.208.95.137:9000/api/v1/',
+    //baseURL: 'http://127.0.0.1:9000/api/v1/',//本地
     //baseURL:'http://10.208.24.233:9000/api/v1/',//主机
     // baseURL:'http://570ebcf6.nat123.fun:20137/api/v1/',
     timeout: 500000
 })
+
+
+
+
 // === 请求拦截器（request）======
 request.interceptors.request.use(
     (config: any) => {
@@ -32,7 +40,9 @@ request.interceptors.request.use(
 request.interceptors.response.use(
     (response: any) => response,
     (error: any) => {
+        openLoading()
         if (error && error.response) {
+            closeLoading()
             error.data = {};
             switch (error.response.status) {
                 case 400:
