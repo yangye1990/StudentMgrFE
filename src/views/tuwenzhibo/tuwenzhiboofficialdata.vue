@@ -68,7 +68,7 @@ var Data = reactive({
     livetitle: ref(""),
     thesaurus: ref("热爱直播"),
     screen: ref("横屏"),
-    start_time: ref(""),
+    start_time: ref("2022-09-31 8:00"),
     upload_pictures: ref(""),
     channel: ref("乐居"),
     choose_city: ref("A-阿坝"),
