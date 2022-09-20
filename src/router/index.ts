@@ -140,32 +140,6 @@ const routes: Array<RouteRecordRaw> = [
             } ,
         ]
     },
-    // 内容池查询
-    // {
-    //     path:'/contentspooling',
-    //     component: Layout,
-    //     name: 'contentspooling',
-    //     meta:{
-    //         title:"内容池查询"
-    //     },
-    //     children:[
-    //         {
-    //             path:'/contentspooling/official',
-    //             component: () => import('../views/spooling/OfficialContent.vue'),
-    //             name: 'official',
-    //             meta:{
-    //                 title:"正式线内容池"
-    //             },
-    //         } ,
-    //         {
-    //             path:'/contentspooling/test',
-    //             component: () => import('../views/spooling/TestContent.vue'),
-    //             name: 'test',
-    //             meta:{
-    //                 title:"测试线内容池"
-    //             },
-    //         }
-    //     ]},
     // 楼盘热力值
     {
         path:'/heat',
@@ -236,6 +210,60 @@ const routes: Array<RouteRecordRaw> = [
             } ,
         ]
     },
+    // 图文直播-正式线
+    {
+        path:'/live/official',
+        component: Layout,
+        name: 'LiveName',
+        meta:{
+            title:"图文直播-正式线"
+        },
+        children:[
+            {
+                path:'/live/official/tuwenzhiboofficialxpath',
+                component: () => import('../views/tuwenzhibo/tuwenzhiboofficialxpath.vue'),
+                name: 'OfficialXpaths',
+                meta:{
+                    title:"正式线-元素定位"
+                },
+            } ,
+            {
+                path:'/live/official/tuwenzhiboofficialdata',
+                component: () => import('../views/tuwenzhibo/tuwenzhiboofficialdata.vue'),
+                name: 'OfficialDatas',
+                meta:{
+                    title:"正式线-创建直播"
+                },
+            }
+        ]
+    },
+    // 图文直播-测试线
+    {
+        path:'/live/test',
+        component: Layout,
+        name: 'Live',
+        meta:{
+            title:"图文直播-测试线"
+        },
+        children:[
+            {
+                path:'/live/test/tuwenzhibotestxpath',
+                component: () => import('../views/tuwenzhibo/tuwenzhibotestxpath.vue'),
+                name: 'TestXpath',
+                meta:{
+                    title:"测试线-元素定位"
+                },
+            } ,
+            {
+                path:'/live/test/tuwenzhibotestdata',
+                component: () => import('../views/tuwenzhibo/tuwenzhibotestdata.vue'),
+                name: 'TestData',
+                meta:{
+                    title:"测试线-创建楼盘"
+                },
+            }
+        ]
+    },
     // 楼盘库后台-正式线
     {
         path:'/house/official',
@@ -290,9 +318,6 @@ const routes: Array<RouteRecordRaw> = [
             }
         ]
     },
-
-
-
 ]
 
 //创建对象

@@ -31,6 +31,10 @@ let loupankuhoutaixpath = new APIBase('loupankuhoutaixpath')
 let loupankuhoutaidata = new APIBase('loupankuhoutaidata')
 let loupankuhoutaiofficialxpath = new APIBase('loupankuhoutaiofficialxpath')
 let loupankuhoutaiofficialdata = new APIBase('loupankuhoutaiofficialdata')
+let tuwenzhibotestxpath = new APIBase('tuwenzhibotestxpath')
+let tuwenzhibotestdata = new APIBase('tuwenzhibotestdata')
+let tuwenzhiboofficialdata = new APIBase('tuwenzhiboofficialdata')
+let tuwenzhiboofficialxpath = new APIBase('tuwenzhiboofficialxpath')
 
 //封装并发布
 export default {
@@ -68,4 +72,10 @@ export default {
     //楼盘库后台-正式线
     loupankuhoutaiofficialxpath,//定位元素
     loupankuhoutaiofficialdata,//创建楼盘
+    // 图文直播-测试线
+    tuwenzhibotestxpath,//定位元素
+    tuwenzhibotestdata,//创建直播
+    // 图文直播-正式线
+    tuwenzhiboofficialxpath,//定位元素
+    tuwenzhiboofficialdata,//创建直播
 }

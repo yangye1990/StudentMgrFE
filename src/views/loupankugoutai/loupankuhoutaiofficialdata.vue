@@ -309,8 +309,8 @@ autoRun()
     <el-table-column prop="pass_word"  label="账号密码" show-password  align="center"  width="120" :show-overflow-tooltip="true" />
     <el-table-column prop="choose_city"  label="选择城市" align="center"  width="120" :show-overflow-tooltip="true" />
 <!--    <el-table-column prop="selectname" label="责任编辑" align="center" width="120" :show-overflow-tooltip="true"/>-->
-    <el-table-column prop="floorname" label="楼盘名称" align="center" width="120" :show-overflow-tooltip="true"/>
-    <el-table-column prop="floorpinyin" label="楼盘名称英文" align="center" width="120" :show-overflow-tooltip="true"/>
+    <el-table-column prop="floorname" label="楼盘名称" align="center" width="350" :show-overflow-tooltip="true"/>
+    <el-table-column prop="floorpinyin" label="楼盘名称英文" align="center" width="350" :show-overflow-tooltip="true"/>
 <!--    <el-table-column prop="thesaurus" label="楼盘关键词" align="center" width="120" :show-overflow-tooltip="true"/>-->
 <!--    <el-table-column prop="description" label="一句话描述" align="center" width="120" :show-overflow-tooltip="true"/>-->
     <el-table-column prop="address" label="楼盘地址" align="center" width="120" :show-overflow-tooltip="true"/>

@@ -112,52 +112,52 @@ let menuList = reactive([
       },
     ],
   },
-  // {
-  //   path: "/contentspooling",
-  //   meta: {
-  //     title: "内容池查询",
-  //     icon: "Search",
-  //   },
-  //   children: [
-  //     {
-  //       path: "/contentspooling/official",
-  //       meta: {
-  //         title: "正式线",
-  //         icon: "ShoppingBag",
-  //       },
-  //     },
-  //     {
-  //       path: "/contentspooling/test",
-  //       meta: {
-  //         title: "测试线",
-  //         icon: "Ship",
-  //       },
-  //     },
-  //   ],
-  // },
-  // {
-  //   path: "/live",
-  //   meta: {
-  //     title: "图文直播",
-  //     icon: "PictureFilled",
-  //   },
-  //   children: [
-  //     {
-  //       path: "/live/add",
-  //       meta: {
-  //         title: "创建图文直播",
-  //         icon: "VideoCameraFilled",
-  //       },
-  //     },
-  //     {
-  //       path: "/live/perform",
-  //       meta: {
-  //         title: "运行创建",
-  //         icon: "OfficeBuilding",
-  //       },
-  //     },
-  //   ],
-  // },
+  {
+    path: "/live/official",
+    meta: {
+      title: "图文直播-正式线",
+      icon: "PictureFilled",
+    },
+    children: [
+      {
+        path: "/live/official/tuwenzhiboofficialxpath",
+        meta: {
+          title: "定位元素-正式线",
+          icon: "Coordinate",
+        },
+      },
+      {
+        path: "/live/official/tuwenzhiboofficialdata",
+        meta: {
+          title: "创建直播-正式线",
+          icon: "CreditCard",
+        },
+      },
+    ],
+  },
+  {
+    path: "/live/test",
+    meta: {
+      title: "图文直播-测试线",
+      icon: "PictureFilled",
+    },
+    children: [
+      {
+        path: "/live/test/tuwenzhibotestxpath",
+        meta: {
+          title: "定位元素-测试线",
+          icon: "Coordinate",
+        },
+      },
+      {
+        path: "/live/test/tuwenzhibotestdata",
+        meta: {
+          title: "创建直播-测试线",
+          icon: "CreditCard",
+        },
+      },
+    ],
+  },
   {
     path: "/house/official",
     meta: {

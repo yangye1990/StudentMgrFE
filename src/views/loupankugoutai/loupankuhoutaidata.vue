@@ -307,11 +307,11 @@ autoRun()
     <el-table-column prop="pass_word"  label="账号密码" show-password  align="center"  width="80" :show-overflow-tooltip="true" />
     <el-table-column prop="choose_city"  label="选择城市" align="center"  width="80" :show-overflow-tooltip="true" />
 <!--    <el-table-column prop="selectname" label="责任编辑" align="center" width="120" :show-overflow-tooltip="true"/>-->
-    <el-table-column prop="floorname" label="楼盘名称" align="center" width="150" :show-overflow-tooltip="true"/>
-    <el-table-column prop="floorpinyin" label="楼盘名称英文" align="center" width="150" :show-overflow-tooltip="true"/>
+    <el-table-column prop="floorname" label="楼盘名称" align="center" width="350" :show-overflow-tooltip="true"/>
+    <el-table-column prop="floorpinyin" label="楼盘名称英文" align="center" width="350" :show-overflow-tooltip="true"/>
 <!--    <el-table-column prop="thesaurus" label="楼盘关键词" align="center" width="120" :show-overflow-tooltip="true"/>-->
 <!--    <el-table-column prop="description" label="一句话描述" align="center" width="120" :show-overflow-tooltip="true"/>-->
-    <el-table-column prop="address" label="楼盘地址" align="center" width="80" :show-overflow-tooltip="true"/>
+    <el-table-column prop="address" label="楼盘地址" align="center" width="150" :show-overflow-tooltip="true"/>
 <!--    <el-table-column prop="tags" label="楼盘标签" align="center" width="120" :show-overflow-tooltip="true"/>-->
     <el-table-column prop="iphone" label="售楼电话" align="center" width="120" :show-overflow-tooltip="true"/>
 <!--    <el-table-column prop="area_code" label="区 号" align="center" width="120" :show-overflow-tooltip="true"/>-->
@@ -322,7 +322,7 @@ autoRun()
 <!--    <el-table-column prop="sales" label="销售状态" align="center" width="120" :show-overflow-tooltip="true"/>-->
 <!--    <el-table-column prop="period" label="产权年限" align="center" width="120" :show-overflow-tooltip="true"/>-->
 <!--    <el-table-column prop="introduction" label="项目介绍" align="center" width="120" :show-overflow-tooltip="true"/>-->
-    <el-table-column label="操作" align="center" width="150" >
+    <el-table-column label="操作" align="center" width="150"  >
       <template #default="scope">
         <el-button type="primary" :icon="More" @click="viewData(scope.row)" circle size="small"/>
         <el-button type="warning" :icon="Edit" @click="editData(scope.row)" circle size="small"/>
